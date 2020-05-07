@@ -92,6 +92,7 @@ update msg model =
         { model
             | results = List.filter (\result -> result.id /= msg.data) model.results
         }
+
     else
         model
 

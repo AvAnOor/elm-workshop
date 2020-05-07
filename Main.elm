@@ -47,11 +47,9 @@ view model =
     div [ class "content" ]
         [ header [] [ h1 [] [ text "Elm Workshop" ] ]
         , div
-            [ style
-                [ ( "font-size", "48px" )
-                , ( "text-align", "center" )
-                , ( "padding", "48px" )
-                ]
+            [ style "font-size" "48px"
+            , style "text-align" "center"
+            , style "padding" "48px"
             ]
             [ text model.status ]
         ]

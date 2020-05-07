@@ -76,7 +76,7 @@ viewMinStarsError : Maybe String -> Html msg
 viewMinStarsError message =
     case message of
         Nothing ->
-            text " "
+            text "\u{00A0}"
 
         Just errorMessage ->
             div [ class "stars-error" ] [ text errorMessage ]
@@ -344,6 +344,7 @@ getQueryString model =
         ++ "+language:elm"
         ++ (if String.isEmpty model.options.userFilter then
                 ""
+
             else
                 "+user:" ++ model.options.userFilter
            )

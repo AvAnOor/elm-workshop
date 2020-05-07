@@ -4,3 +4,11 @@ Auth.elm
 generated-code
 build-artifacts
 *.log
+elm-stuff
+
+# Editors
+.vscode/
+.idea/
+.metals/
+# Windows
+Thumbs.db

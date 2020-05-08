@@ -63,7 +63,7 @@ searchResultDecoder =
 
 view : Model -> Html Msg
 view model =
-    div [ class "content" ]
+    div [ class "content", style "text-align" "center" ]
         [ header [] [ h1 [] [ text "Elm Workshop" ] ]
         , div
             [ style "font-size" "48px"

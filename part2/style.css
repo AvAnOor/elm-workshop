@@ -10,11 +10,11 @@ header {
   position: relative;
   padding: 6px 12px;
   height: 36px;
-  background-color: rgb(96, 181, 204);
+  background-color: rgb(10, 10, 10);
 }
 
 h1 {
-  color: white;
+  color: rgb(250, 250, 250);
   font-weight: normal;
   margin: 0;
 }
@@ -29,9 +29,10 @@ h1 {
 }
 
 .results {
-  list-style-image: url('http://img-cache.cdn.gaiaonline.com/76bd5c99d8f2236e9d3672510e933fdf/http://i278.photobucket.com/albums/kk81/d3m3nt3dpr3p/Tiny-Star-Icon.png');
+  list-style-image: url("star.svg");
   list-style-position: inside;
   padding: 0;
+  text-decoration: black;
 }
 
 .results li {
@@ -95,7 +96,4 @@ button:focus, input:focus {
   background-color: #FF9632;
   padding: 20px;
   box-sizing: border-box;
-  overflow-x: auto;
-  font-family: monospace;
-  font-size: 18px;
 }

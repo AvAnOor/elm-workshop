@@ -5,7 +5,7 @@ Getting Started
 
 ## Installation
 
-1. Install [Node.js](http://nodejs.org) 6.9.2 or higher
+1. Install latest [Node.js](http://nodejs.org) 
 
 2. Add a plugin for your editor of choice: [Atom](https://atom.io/packages/language-elm), [Sublime Text](https://packagecontrol.io/packages/Elm%20Language%20Support), [VS Code](https://github.com/sbrink/vscode-elm), [Light Table](https://github.com/rundis/elm-light), [Vim](https://github.com/lambdatoast/elm.vim), [Emacs](https://github.com/jcollard/elm-mode), [Brackets](https://github.com/lepinay/elm-brackets)
 
@@ -14,7 +14,7 @@ Getting Started
 4. Run the following command to install everything else:
 
 ```bash
-npm install -g elm elm-test elm-css elm-live@2.6.1 elm-format@exp
+npm install -g elm elm-test elm-css elm-live elm-format
 ```
 **Note to macOS users:** If step 4 gives you an `EACCESS` error, try [this fix](https://docs.npmjs.com/getting-started/fixing-npm-permissions):
 
@@ -33,6 +33,8 @@ Run this at the terminal:
 git clone https://github.com/rtfeldman/elm-workshop.git
 cd elm-workshop
 ```
+
+## Run elm-upgrade - [follow this guide] (https://github.com/avh4/elm-upgrade/blob/master/README.md)
 
 **Note:** Tab characters are syntax errors in Elm code, so if your editor uses them for indentation, definitely switch it to spaces for this workshop!
 
@@ -62,19 +64,18 @@ an API secret, and you should [delete this token](https://github.com/settings/to
 
 ## Verify Setup
 
-Run this to install packages:
+<!-- Run this to install packages:
 
 ```bash
 elm-package install --yes
-```
+``` -->
 
 Once that succeeds, run this to verify everything:
 
 ```bash
-elm-live Main.elm --open --output=elm.js
+elm-live Main.elm -- --output=elm.js 
 ```
 
-A browser should open, and you should see this in it:
 
 ![](https://cloud.githubusercontent.com/assets/1094080/14227327/db89d3a0-f8af-11e5-8c37-c3e8afaa9d03.png)
 

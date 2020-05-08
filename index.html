@@ -4,16 +4,18 @@
 <head>
   <meta charset="UTF-8">
   <title>Elm Workshop</title>
-  <script type="text/javascript" src="/elm.js"></script>
   <link rel="stylesheet" href="/style.css">
+  <script src="main.js"></script>
   <link rel="icon" type="image/png" href="/elm-hub.png">
 </head>
 
 <body>
+  <div id="myapp"></div>
+  <script>
+    var app = Elm.Main.init({
+      node: document.getElementById('myapp')
+    });
+  </script>
 </body>
-
-<script type="text/javascript">
-  var app = Elm.Main.fullscreen();
-</script>
 
 </html>

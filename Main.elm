@@ -5,30 +5,38 @@ have everything set up properly.
 -}
 
 import Auth
+import Browser exposing (..)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Http
-import Json.Decode exposing (Decoder)
+import Json.Decode exposing (Decoder, field, string, succeed)
+import Json.Decode.Pipeline exposing (..)
 
 
-main : Program Never Model Msg
+main : Program () Model Msg
 main =
-    Html.program
-        { view = view
-        , update = update
-        , init = ( initialModel, searchFeed )
+    Browser.element
+        { init = init
         , subscriptions = \_ -> Sub.none
+        , update = update
+        , view = view
         }
 
 
-initialModel : Model
-initialModel =
-    { status = "Verifying setup..."
-    }
+init : () -> ( Model, Cmd Msg )
+init _ =
+    ( { status = "Verifying setup..." }, searchFeed )
 
 
 type alias Model =
     { status : String }
+
+
+type alias SearchResult =
+    { id : Int
+    , name : String
+    , stars : Int
+    }
 
 
 searchFeed : Cmd Msg
@@ -37,9 +45,20 @@ searchFeed =
         url =
             "https://api.github.com/search/repositories?q=test&access_token=" ++ Auth.token
     in
-    Json.Decode.succeed ()
-        |> Http.get url
-        |> Http.send Response
+    Http.get { url = url, expect = Http.expectJson Response responseDecoder }
+
+
+responseDecoder : Decoder (List SearchResult)
+responseDecoder =
+    Json.Decode.at [ "items" ] (Json.Decode.list searchResultDecoder)
+
+
+searchResultDecoder : Decoder SearchResult
+searchResultDecoder =
+    succeed SearchResult
+        |> Json.Decode.Pipeline.required "id" Json.Decode.int
+        |> Json.Decode.Pipeline.required "full_name" Json.Decode.string
+        |> Json.Decode.Pipeline.required "stargazers_count" Json.Decode.int
 
 
 view : Model -> Html Msg
@@ -56,13 +75,13 @@ view model =
 
 
 type Msg
-    = Response (Result Http.Error ())
+    = Response (Result Http.Error (List SearchResult))
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
     case msg of
-        Response (Ok ()) ->
+        Response (Ok _) ->
             ( { status = "You're all set!" }, Cmd.none )
 
         Response (Err err) ->
@@ -78,18 +97,16 @@ update msg model =
                         Http.BadUrl url ->
                             "Invalid test URL: " ++ url
 
-                        Http.BadPayload msg _ ->
-                            "Something is misconfigured: " ++ msg
+                        Http.BadBody mess ->
+                            "Something is misconfigured: " ++ mess
 
-                        Http.BadStatus { status } ->
-                            case status.code of
+                        Http.BadStatus stat ->
+                            case stat of
                                 401 ->
                                     "Auth.elm does not have a valid token. :( Try recreating Auth.elm by following the steps in the README under the section “Create a GitHub Personal Access Token”."
 
                                 _ ->
                                     "GitHub's Search API returned an error: "
-                                        ++ toString status.code
-                                        ++ " "
-                                        ++ status.message
+                                        ++ String.fromInt stat
             in
             ( { status = status }, Cmd.none )

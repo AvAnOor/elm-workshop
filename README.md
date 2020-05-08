@@ -34,11 +34,11 @@ git clone https://github.com/rtfeldman/elm-workshop.git
 cd elm-workshop
 ```
 
+**Note:** Tab characters are syntax errors in Elm code, so if your editor uses them for indentation, definitely switch it to spaces for this workshop!
+
 ## Run elm-upgrade 
 
 Perform version upgrade .18 to .19 [follow this guide](https://github.com/avh4/elm-upgrade/blob/master/README.md)
-
-**Note:** Tab characters are syntax errors in Elm code, so if your editor uses them for indentation, definitely switch it to spaces for this workshop!
 
 ## Create a GitHub Personal Access Token
 

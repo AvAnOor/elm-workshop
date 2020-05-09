@@ -4,19 +4,21 @@ Part 6
 ## Installation
 
 ```bash
-elm-package install
+elm init
 ```
 
 (Answer `y` when prompted.)
 
+elm install NoRedInk/elm-json-decode-pipeline
+elm install elm/json
 
-## Building
-
+cp *.elm src
+main
 ```bash
-elm-live Main.elm --open --output=elm.js
+elm-live Main.elm -- --output=.js
 ```
 
 ## References
 
 * [JSON decoding](http://guide.elm-lang.org/interop/json.html)
-* [`elm-decode-pipeline` documentation](http://package.elm-lang.org/packages/NoRedInk/elm-decode-pipeline/latest)
+* [`elm-json-decode-pipeline` documentation](https://package.elm-lang.org/packages/NoRedInk/elm-json-decode-pipeline/latest/Json-Decode-Pipeline)

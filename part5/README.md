@@ -4,16 +4,17 @@ Part 5
 ## Installation
 
 ```bash
-elm-package install
+elm init
 ```
 
 (Answer `y` when prompted.)
 
+cp Main.elm src
 
 ## Building
 
 ```bash
-elm-live Main.elm --open --output=elm.js
+elm-live Main.elm -- --output=main.js
 ```
 
 ## References

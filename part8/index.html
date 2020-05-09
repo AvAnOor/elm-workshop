@@ -4,22 +4,19 @@
 <head>
   <meta charset="UTF-8">
   <title>ElmHub</title>
-  <script type="text/javascript" src="/elm.js"></script>
-  <script type="text/javascript" src="/github.js"></script>
-
   <link rel="stylesheet" href="/style.css">
+  <script src="main.js"></script>
+  <script type="text/javascript" src="/github.js"></script>
   <link rel="icon" type="image/png" href="/elm-hub.png">
 </head>
 
 <body>
-  <div id="elm-landing-pad"></div>
+  <div id="myapp"></div>
 </body>
-
-<script type="text/javascript">
-  // documentation: https://github.com/michael/github
+<script>
   var github = new Github();
 
-  var app = Elm.Main.embed(document.getElementById("elm-landing-pad"));
+  var app = Elm.Main.init({ node: document.getElementById('myapp') });
 
   function searchGithub(query) {
     console.log("Searching for", query);
@@ -27,11 +24,11 @@
     github.getSearch(query).repositories({}, function (err, repositories) {
       console.log("Got response", repositories);
 
-      // TODO: app.ports.portNameGoesHere.send(repositories);
+      app.ports.githubResponse.send(repositories);
     });
   }
 
-  // TODO app.ports.portNameGoesHere.subscribe(searchGithub);
+  app.ports.githubSearch.subscribe(searchGithub);
 </script>
 
 </html>

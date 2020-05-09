@@ -4,16 +4,21 @@ Part 7
 ## Installation
 
 ```bash
-elm-package install
+elm init
 ```
 
 (Answer `y` when prompted.)
 
+cp Main.elm src
+cp ../Auth.elm src
 
 ## Building
 
+elm install elm/json
+elm install NoRedInk/elm-json-decode-pipeline
+
 ```bash
-elm-live Main.elm --open --output=elm.js
+elm-live Main.elm -- --output=main.js
 ```
 
 ## References

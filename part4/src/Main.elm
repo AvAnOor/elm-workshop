@@ -1,5 +1,6 @@
 module Main exposing (..)
 
+import Browser exposing (sandbox)
 import Html exposing (..)
 import Html.Attributes exposing (..)
 import Html.Events exposing (onClick)
@@ -24,11 +25,7 @@ type alias Msg =
     }
 
 
-{-| TODO add a type annotation to this value
-
-HINT: The type aliases above may come in handy for these exercises!
-
--}
+initialModel : Model
 initialModel =
     { query = "tutorial"
     , results =
@@ -56,8 +53,7 @@ initialModel =
     }
 
 
-{-| TODO add a type annotation to this function
--}
+view : Model -> Html Msg
 view model =
     let
         elmHubHeader =
@@ -72,11 +68,10 @@ view model =
         ]
 
 
-{-| TODO add a type annotation to this function
--}
+viewSearchResult : SearchResult -> Html Msg
 viewSearchResult result =
     li []
-        [ span [ class "star-count" ] [ text (toString result.stars) ]
+        [ span [ class "star-count" ] [ text (String.fromInt result.stars) ]
         , a [ href ("https://github.com/" ++ result.name), target "_blank" ]
             [ text result.name ]
         , button
@@ -87,6 +82,7 @@ viewSearchResult result =
 
 {-| TODO add a type annotation to this function
 -}
+update : Msg -> Model -> Model
 update msg model =
     if msg.operation == "DELETE_BY_ID" then
         { model
@@ -98,8 +94,8 @@ update msg model =
 
 
 main =
-    Html.beginnerProgram
-        { view = view
+    Browser.sandbox
+        { init = initialModel
+        , view = view
         , update = update
-        , model = initialModel
         }
